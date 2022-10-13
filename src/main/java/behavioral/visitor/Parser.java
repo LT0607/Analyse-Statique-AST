@@ -21,7 +21,8 @@ public class Parser {
 	 static NombreDeMethodes nombre_de_methodes;
 	 static NombreDePackages nombre_de_packages;
 	 static NombreAttributs nombre_d_attributs;
-	 
+	 static PourcentageClassesAvecPlusDeMethodes pourcentage_classe_plus_de_methodes;
+	 public static Visitor visitor = new Visitor();
 	public static void main(String[] args) throws IOException {
 
 		// read java files
@@ -34,11 +35,15 @@ public class Parser {
 			//System.out.println(content);
 
 		    CompilationUnit parse = parse(content.toCharArray());
-		    
+		     parse.accept(visitor);
 		     nombre_de_classe = new NombreDeClasse(parse);
 		     nombre_de_methodes = new NombreDeMethodes(parse);
 		     nombre_de_packages = new NombreDePackages(parse);
 		     nombre_d_attributs = new NombreAttributs (parse);
+		     pourcentage_classe_plus_de_methodes = new PourcentageClassesAvecPlusDeMethodes (parse);
+		 	//** Réponse à la question 8
+				
+		     
 			// print methods info
 			//printMethodInfo(parse);
 			
@@ -72,6 +77,19 @@ public class Parser {
 		double nombre_moyen_attributs = 0;
 		nombre_moyen_attributs = NombreAttributs.NombreTotalAttributs() / NombreDeClasse.NombreTotalDeClasses();
 		//System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
+		
+	       int totalMethodsNbr =0;
+		   for (String key : visitor.getMethods().keySet())
+	            totalMethodsNbr +=  visitor.getMethods().get(key).length;
+	        for (var entry : visitor.getMethods().entrySet()) {
+	            System.out.println("key : "+entry.getKey()+"\n");
+	            for (MethodDeclaration method : entry.getValue()) {
+	                System.out.println(method.getName().toString());
+	            }
+	        }
+		System.out.println("attributs=========================================================");	
+	        visitor.getParentVariables();
+	        
 	}
 
 	// read all java files from specific folder
