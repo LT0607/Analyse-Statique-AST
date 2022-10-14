@@ -65,7 +65,7 @@ public class Visitor extends ASTVisitor {
         vars.add(temp);
         List<String> neww = new ArrayList<>(new LinkedHashSet<>(parents));
         for (int k = 0; k < vars.size(); k++) {
-        	System.out.println("++++"+parents.get(k));
+        	//System.out.println("le parent est "+parents.get(k));
             parentVariables.put(neww.get(k), vars.get(k));
         }
          for (var entry : parentVariables.entrySet())

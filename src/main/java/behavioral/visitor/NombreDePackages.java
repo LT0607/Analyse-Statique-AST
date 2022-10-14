@@ -21,9 +21,9 @@ public class NombreDePackages {
    }
    
 
-public int NombreTotalDePackages() {
+   public int NombreTotalDePackages() {
 	packages.forEach(i -> System.out.println(i));
     return packages.size();
-}
+   }
   
 }

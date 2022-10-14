@@ -51,29 +51,43 @@ public class Parser {
 		}
 		
 		//**** Réponse à la question 1
-		//System.out.println("Le nombre total de classes est "+ NombreDeClasse.NombreTotalDeClasses());
+		System.out.println("");
+		System.out.println("Réponse à la question 1");
+		System.out.println("Le nombre total de classes est "+ NombreDeClasse.NombreTotalDeClasses());
 		
 		//**** Réponse à la question 3
-		//System.out.println("Le nombre total de méthodes est "+ nombre_de_methodes.NombreTotalDeMethodes());
+		System.out.println("******************************************************");
+		System.out.println("");
+		System.out.println("Réponse à la question 3");
+		System.out.println("Le nombre total de méthodes est "+ nombre_de_methodes.NombreTotalDeMethodes());
 		 
+		//** Réponse à la question 4 
+		System.out.println("******************************************************");
+		System.out.println("");
+		System.out.println("Réponse à la question 4");
+	    System.out.println("Le nombre total de packages est "+ nombre_de_packages.NombreTotalDePackages());
+		
 		//** Réponse à la question 5	
+	    System.out.println("******************************************************");
+	    System.out.println("");
+		System.out.println("Réponse à la question 5");
 		double nombre_moyen_methodes = 0;
 		nombre_moyen_methodes = nombre_de_methodes.NombreTotalDeMethodes() / NombreDeClasse.NombreTotalDeClasses();
-		//System.out.println("nombre moyen de methodes : "+ nombre_moyen_methodes);
-		
-		//** Réponse à la question 4 
-	    //System.out.println("Le nombre total de packages est "+ nombre_de_packages.NombreTotalDePackages());
+		System.out.println("nombre moyen de methodes : "+ nombre_moyen_methodes);
 		
 		//** Réponse à la question 7
-		//System.out.println("Le nombre total d'attributs est "+ NombreAttributs.NombreTotalAttributs());
+		System.out.println("******************************************************");
+		System.out.println("");
+		System.out.println("Réponse à la question 7");
+		System.out.println("Le nombre total d'attributs est "+ NombreAttributs.NombreTotalAttributs());
 		
 		double nombre_moyen_attributs = 0;
 		nombre_moyen_attributs = NombreAttributs.NombreTotalAttributs() / NombreDeClasse.NombreTotalDeClasses();
-		//System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
+		System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
 		
 		
 		//Afficher la liste des methodes par classe
-	       int totalMethodsNbr =0;
+	     /*  int totalMethodsNbr =0;
 		   for (String key : visitor.getMethods().keySet())
 	            totalMethodsNbr +=  visitor.getMethods().get(key).length;
 	        for (var entry : visitor.getMethods().entrySet()) {
@@ -81,20 +95,31 @@ public class Parser {
 	            for (MethodDeclaration method : entry.getValue()) {
 	                System.out.println(method.getName().toString());
 	            }
-	        }
+	        }*/
 	     
-	    //Afficher la liste des attributs par classe    
-		//System.out.println("attributs=========================================================");	
+	    // Afficher la liste des attributs par classe    
+		// System.out.println("attributs=========================================================");	
 	     //   visitor.getParentVariables();
+	        
 	    //** Réponse à la question 8    
-	    // System.out.println("Le 10% des classes qui ont le plus de méthodes : "+ pourcentage_classes_methodes.getClasses10Methods());  
+		System.out.println("******************************************************");
+		System.out.println("");
+		System.out.println("Réponse à la question 8");
+	    System.out.println("Le 10% des classes qui ont le plus de méthodes : "+ pourcentage_classes_methodes.getClasses10Methods());   
+	    
 	   
 	   //** Réponse à la question 9    
-	   //  System.out.println("Le 10% des classes qui ont le plus d'attributs "+ pourcentage_classes_attributs.getClasses10Attirbutes());
+	    System.out.println("******************************************************");
+	    System.out.println("");
+	    System.out.println("Réponse à la question 9");
+	    System.out.println("Le 10% des classes qui ont le plus d'attributs "+ pourcentage_classes_attributs.getClasses10Attirbutes());
 	        
 	   //** Réponse à la question 11
+	    System.out.println("******************************************************");
+	    System.out.println("");
+	    System.out.println("Réponse à la question 9");
 	        int n = 8;
-	      System.out.println("Les classes possédant plus de "+n+" methodes"+ x_methodes.getClassesXMethods(n));  
+	    System.out.println("Les classes possédant plus de "+n+" methodes"+ x_methodes.getClassesXMethods(n));  
 	        
 	}
 
