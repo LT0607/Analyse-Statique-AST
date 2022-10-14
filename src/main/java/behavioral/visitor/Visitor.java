@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 public class Visitor extends ASTVisitor {
 	
 	 public static Map<String, MethodDeclaration[]> methods = new HashMap<>();
-	 public  Map<String, MethodDeclaration[]> getMethods() {return methods;}
+	 public static  Map<String, MethodDeclaration[]> getMethods() {return methods;}
 
 	 
 	 public boolean visit(TypeDeclaration node) {
@@ -26,7 +26,7 @@ public class Visitor extends ASTVisitor {
 	 
 	public static List<String> variables = new ArrayList<String>();
 	public static List<String> parents = new ArrayList<String>();
-	public Map<String, List<String>> parentVariables = new HashMap<>();
+	public static Map<String, List<String>> parentVariables = new HashMap<>();
 
     public boolean visit(VariableDeclarationFragment node) {
 	        if (node.getParent().getParent() instanceof TypeDeclaration) {
@@ -45,12 +45,12 @@ public class Visitor extends ASTVisitor {
     public List<String> getParent() {
         return parents;
     }
-    public Map<String, List<String>> getParentVariables() {
+    public static Map<String, List<String>> getParentVariables() {
         pushParentVariables();
         return parentVariables;
     }
 
-    public void pushParentVariables () {
+    public static void pushParentVariables () {
         List<List<String>> vars = new ArrayList<>();
         List<String> temp = new ArrayList<>();
 
@@ -72,7 +72,7 @@ public class Visitor extends ASTVisitor {
          System.out.println("class : "+entry.getKey()+" --- attributes : "+ entry.getValue()+"\n");
          //for (int k = 0; k < vars.size(); k++)
          //for (int m = 0; m < vars.get(k).size(); m++)
-         //System.out.println(k+"-"+vars.get(k).get(m));
+         //System.out.println(k+"-"+vars.get(k).get(m)); 
         
     }
 

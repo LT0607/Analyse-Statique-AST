@@ -3,6 +3,7 @@ package behavioral.visitor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
@@ -21,8 +22,12 @@ public class Parser {
 	 static NombreDeMethodes nombre_de_methodes;
 	 static NombreDePackages nombre_de_packages;
 	 static NombreAttributs nombre_d_attributs;
-	 static PourcentageClassesAvecPlusDeMethodes pourcentage_classe_plus_de_methodes;
+	 static PourcentageClassesAvecPlusDeMethodes pourcentage_classes_methodes;
+	 static PourcentageClassesAvecPlusAttributs pourcentage_classes_attributs;
+	 static X_Methodes x_methodes;
+	 
 	 public static Visitor visitor = new Visitor();
+	 
 	public static void main(String[] args) throws IOException {
 
 		// read java files
@@ -40,22 +45,9 @@ public class Parser {
 		     nombre_de_methodes = new NombreDeMethodes(parse);
 		     nombre_de_packages = new NombreDePackages(parse);
 		     nombre_d_attributs = new NombreAttributs (parse);
-		     pourcentage_classe_plus_de_methodes = new PourcentageClassesAvecPlusDeMethodes (parse);
-		 	//** Réponse à la question 8
-				
-		     
-			// print methods info
-			//printMethodInfo(parse);
-			
-			
-			// print variables info
-			//printVariableInfo(parse);
-			
-			//print method invocations
-			//printMethodInvocationInfo(parse);
-
-			//printClass(parse);
-
+		     pourcentage_classes_methodes = new PourcentageClassesAvecPlusDeMethodes (nombre_de_classe.NombreTotalDeClasses(), nombre_de_methodes.NombreTotalDeMethodes());
+		     pourcentage_classes_attributs = new PourcentageClassesAvecPlusAttributs (nombre_de_classe.NombreTotalDeClasses(), nombre_de_methodes.NombreTotalDeMethodes());
+		     x_methodes = new X_Methodes();
 		}
 		
 		//**** Réponse à la question 1
@@ -74,10 +66,13 @@ public class Parser {
 		
 		//** Réponse à la question 7
 		//System.out.println("Le nombre total d'attributs est "+ NombreAttributs.NombreTotalAttributs());
+		
 		double nombre_moyen_attributs = 0;
 		nombre_moyen_attributs = NombreAttributs.NombreTotalAttributs() / NombreDeClasse.NombreTotalDeClasses();
 		//System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
 		
+		
+		//Afficher la liste des methodes par classe
 	       int totalMethodsNbr =0;
 		   for (String key : visitor.getMethods().keySet())
 	            totalMethodsNbr +=  visitor.getMethods().get(key).length;
@@ -87,8 +82,19 @@ public class Parser {
 	                System.out.println(method.getName().toString());
 	            }
 	        }
-		System.out.println("attributs=========================================================");	
-	        visitor.getParentVariables();
+	     
+	    //Afficher la liste des attributs par classe    
+		//System.out.println("attributs=========================================================");	
+	     //   visitor.getParentVariables();
+	    //** Réponse à la question 8    
+	    // System.out.println("Le 10% des classes qui ont le plus de méthodes : "+ pourcentage_classes_methodes.getClasses10Methods());  
+	   
+	   //** Réponse à la question 9    
+	   //  System.out.println("Le 10% des classes qui ont le plus d'attributs "+ pourcentage_classes_attributs.getClasses10Attirbutes());
+	        
+	   //** Réponse à la question 11
+	        int n = 8;
+	      System.out.println("Les classes possédant plus de "+n+" methodes"+ x_methodes.getClassesXMethods(n));  
 	        
 	}
 
