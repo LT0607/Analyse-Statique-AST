@@ -22,7 +22,7 @@ public class MethodInvocationVisitor extends ASTVisitor {
 	}
 
 	
-	public List<MethodInvocation> getMethods() {
+	public List<MethodInvocation> getMethodsInvocation() {
 		return methods;
 	}
 	

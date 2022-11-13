@@ -3,8 +3,10 @@ package behavioral.visitor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jdt.core.JavaCore;
@@ -14,7 +16,7 @@ import org.eclipse.jdt.core.dom.*;
 public class Parser {
 	
 	
-	public static final String projectPath = "C:\\Users\\Lydia\\eclipse-workspace\\tp";
+	public static final String projectPath = "C:\\Users\\Lydia\\eclipse-workspace\\project1";
 	public static final String projectSourcePath = projectPath + "\\src";
 	public static final String jrePath = "C:\\Program Files\\Java\\jre1.8.0_51\\lib\\rt.jar";
 	
@@ -25,6 +27,13 @@ public class Parser {
 	 static PourcentageClassesAvecPlusDeMethodes pourcentage_classes_methodes;
 	 static PourcentageClassesAvecPlusAttributs pourcentage_classes_attributs;
 	 static X_Methodes x_methodes;
+	 static GraphCall graph;
+	
+	 //***tp2
+	 static Couplage couplage;
+	 static Couplage2 couplage2;
+	 //********
+	 Set<String> setLink = new HashSet<String>();
 	 
 	 public static Visitor visitor = new Visitor();
 	 
@@ -48,42 +57,52 @@ public class Parser {
 		     pourcentage_classes_methodes = new PourcentageClassesAvecPlusDeMethodes (nombre_de_classe.NombreTotalDeClasses(), nombre_de_methodes.NombreTotalDeMethodes());
 		     pourcentage_classes_attributs = new PourcentageClassesAvecPlusAttributs (nombre_de_classe.NombreTotalDeClasses(), nombre_de_methodes.NombreTotalDeMethodes());
 		     x_methodes = new X_Methodes();
+		     graph = new GraphCall();
+		   //*** Graphe d'appel
+		   //System.out.println("node");
+		     graph.collectGraphData( parse);  
+		   //*** Couplage
+		    
+		     couplage = new Couplage();
+		     couplage2 = new Couplage2();
+		     couplage2.CallG(parse);
+		     
 		}
 		
 		//**** Réponse à la question 1
-		System.out.println("");
-		System.out.println("Réponse à la question 1");
-		System.out.println("Le nombre total de classes est "+ NombreDeClasse.NombreTotalDeClasses());
+		//System.out.println("");
+		//System.out.println("Réponse à la question 1");
+		//System.out.println("Le nombre total de classes est "+ NombreDeClasse.NombreTotalDeClasses());
 		
 		//**** Réponse à la question 3
-		System.out.println("******************************************************");
-		System.out.println("");
-		System.out.println("Réponse à la question 3");
-		System.out.println("Le nombre total de méthodes est "+ nombre_de_methodes.NombreTotalDeMethodes());
+		//System.out.println("******************************************************");
+		//System.out.println("");
+		//System.out.println("Réponse à la question 3");
+		//System.out.println("Le nombre total de méthodes est "+ nombre_de_methodes.NombreTotalDeMethodes());
 		 
 		//** Réponse à la question 4 
-		System.out.println("******************************************************");
-		System.out.println("");
-		System.out.println("Réponse à la question 4");
-	    System.out.println("Le nombre total de packages est "+ nombre_de_packages.NombreTotalDePackages());
+		//System.out.println("******************************************************");
+		//System.out.println("");
+		//System.out.println("Réponse à la question 4");
+	    //System.out.println("Le nombre total de packages est "+ nombre_de_packages.NombreTotalDePackages());
 		
 		//** Réponse à la question 5	
-	    System.out.println("******************************************************");
-	    System.out.println("");
-		System.out.println("Réponse à la question 5");
+	    //System.out.println("******************************************************");
+	    //System.out.println("");
+		//System.out.println("Réponse à la question 5");
 		double nombre_moyen_methodes = 0;
 		nombre_moyen_methodes = nombre_de_methodes.NombreTotalDeMethodes() / NombreDeClasse.NombreTotalDeClasses();
-		System.out.println("nombre moyen de methodes : "+ nombre_moyen_methodes);
+		//System.out.println("nombre moyen de methodes : "+ nombre_moyen_methodes);
 		
 		//** Réponse à la question 7
-		System.out.println("******************************************************");
-		System.out.println("");
-		System.out.println("Réponse à la question 7");
-		System.out.println("Le nombre total d'attributs est "+ NombreAttributs.NombreTotalAttributs());
+		//System.out.println("******************************************************");
+		//System.out.println("");
+		//System.out.println("Réponse à la question 7");
+		//System.out.println("Le nombre total d'attributs est "+ NombreAttributs.NombreTotalAttributs());
 		
 		double nombre_moyen_attributs = 0;
 		nombre_moyen_attributs = NombreAttributs.NombreTotalAttributs() / NombreDeClasse.NombreTotalDeClasses();
-		System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
+		//System.out.println("Le nombre moyen d'attributs par classe est "+ nombre_moyen_attributs);
 		
 		
 		//Afficher la liste des methodes par classe
@@ -102,25 +121,38 @@ public class Parser {
 	     //   visitor.getParentVariables();
 	        
 	    //** Réponse à la question 8    
-		System.out.println("******************************************************");
-		System.out.println("");
-		System.out.println("Réponse à la question 8");
-	    System.out.println("Le 10% des classes qui ont le plus de méthodes : "+ pourcentage_classes_methodes.getClasses10Methods());   
+		//System.out.println("******************************************************");
+		//System.out.println("");
+		//System.out.println("Réponse à la question 8");
+	    //System.out.println("Le 10% des classes qui ont le plus de méthodes : "+ pourcentage_classes_methodes.getClasses10Methods());   
 	    
 	   
 	   //** Réponse à la question 9    
-	    System.out.println("******************************************************");
-	    System.out.println("");
-	    System.out.println("Réponse à la question 9");
-	    System.out.println("Le 10% des classes qui ont le plus d'attributs "+ pourcentage_classes_attributs.getClasses10Attirbutes());
+	    //System.out.println("******************************************************");
+	    //System.out.println("");
+	    //System.out.println("Réponse à la question 9");
+	    //System.out.println("Le 10% des classes qui ont le plus d'attributs "+ pourcentage_classes_attributs.getClasses10Attirbutes());
 	        
 	   //** Réponse à la question 11
-	    System.out.println("******************************************************");
-	    System.out.println("");
-	    System.out.println("Réponse à la question 9");
+	   // System.out.println("******************************************************");
+	   //System.out.println("");
+	   //System.out.println("Réponse à la question 9");
 	        int n = 8;
-	    System.out.println("Les classes possédant plus de "+n+" methodes"+ x_methodes.getClassesXMethods(n));  
-	        
+	   //System.out.println("Les classes possédant plus de "+n+" methodes"+ x_methodes.getClassesXMethods(n));  
+	    
+	   //***** Couplage
+	        Set<String> s = new HashSet<String>();
+	        Set<String> s2 = new HashSet<String>();
+		      
+		     s2 = couplage2.RetourSet();
+		     System.out.println(s2);
+		     double toutes = couplage.ToutesRelations(s2);
+		     double deux = couplage.CoupleRelation(s2, "AA", "BB");
+		     System.out.println("Nombre de toutes les relations "+ toutes);  
+		     System.out.println("Nombre de relations entre AA et BB "+ deux);
+	         System.out.println("Couplage entre AA et BB "+ couplage.CalculCouplage(deux, toutes));
+	         
+	         couplage.GraphPond(s2);
 	}
 
 	// read all java files from specific folder
@@ -214,7 +246,7 @@ public class Parser {
 				MethodInvocationVisitor visitor2 = new MethodInvocationVisitor();
 				method.accept(visitor2);
 
-				for (MethodInvocation methodInvocation : visitor2.getMethods()) {
+				for (MethodInvocation methodInvocation : visitor2.getMethodsInvocation()) {
 					System.out.println("method " + method.getName() + " invoc method "
 							+ methodInvocation.getName());
 				}
